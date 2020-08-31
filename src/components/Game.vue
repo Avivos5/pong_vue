@@ -17,6 +17,13 @@ export default {
   data() {
     return {
       vueCanvas: null,
+
+      playerResult: {
+        score: 0,
+        lifes: 3,
+        bestScore: 0,
+      },
+
       // Ball object
       ball: {
         x: this.canvasWidth / 2,
@@ -49,6 +56,7 @@ export default {
       },
 
       intervalId: "",
+      pointAdded: false,
     };
   },
 
@@ -95,9 +103,21 @@ export default {
       }
     },
 
+    drawText(text, x, y) {
+      this.vueCanvas.fillStyle = "#555";
+      this.vueCanvas.font = "75px 'Press Start 2P', cursive";
+      this.vueCanvas.fillText(text, x, y);
+    },
+
     render() {
       // draw canvas
       this.drawRect(0, 0, this.canvasWidth, this.canvasHeight, "#000");
+
+      this.drawText(
+        this.playerResult.score,
+        this.canvasWidth / 5,
+        this.canvasHeight / 3.5
+      );
 
       // draw the net
       this.drawNet();
@@ -134,6 +154,7 @@ export default {
       Math.random() > 0.5
         ? (this.ball.velocityY = 5)
         : (this.ball.velocityY = -5);
+      this.ball.velocityX = -5;
       this.ball.currentSpeed = this.ball.startSpeed;
     },
 
@@ -144,16 +165,21 @@ export default {
       ) {
         //when the ball hits top or bottom wall
         this.ball.velocityY = -this.ball.velocityY;
+        if (this.pointAdded) this.pointAdded = false;
       }
 
       if (this.ball.x + this.ball.radius > this.canvasWidth) {
         // when the ball hits right wall
         this.ball.velocityX = -this.ball.velocityX;
+        if (this.pointAdded) this.pointAdded = false;
       }
 
       if (this.ball.x - this.ball.radius < 0) {
         // when the ball hits left wall
+
+        this.playerResult.lifes--;
         this.resetBall();
+        if (this.pointAdded) this.pointAdded = false;
       }
 
       if (
@@ -162,6 +188,8 @@ export default {
         this.user.y + this.user.height > this.ball.y - this.ball.radius
       ) {
         // paddle collision handling
+
+        // this.ball.velocityX = -this.ball.velocityX;
 
         const collPoit = this.ball.y - (this.user.y + this.user.height / 2); //checking part of the paddle which was hit by the ball
 
@@ -173,6 +201,12 @@ export default {
         this.ball.velocityY = this.ball.currentSpeed * Math.sin(angleRadians);
 
         this.ball.currentSpeed += this.ball.startSpeed * 0.01;
+
+        if (!this.pointAdded) {
+          //prevents from adding more than one point in one hit
+          this.playerResult.score++;
+          this.pointAdded = true;
+        }
       }
 
       this.ball.x += this.ball.velocityX;
@@ -190,6 +224,7 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 #canv {
   border: 1px solid black;
 }
