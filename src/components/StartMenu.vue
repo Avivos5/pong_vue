@@ -3,7 +3,7 @@
     <div class="menu" v-if="!exit">
       <h1>The Pong Game</h1>
       <div class="btns">
-        <button @click="startGame()">NOWA GRA</button>
+        <button @click="startGame">NOWA GRA</button>
         <button @click="exit=true">WYJŚCIE Z GRY</button>
       </div>
     </div>

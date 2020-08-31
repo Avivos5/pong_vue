@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="menu" v-if="!exit">
+    <div class="menu">
       <p class="mainText">Koniec gry</p>
       <div class="results">
-        <p>Twój wynik: 0</p>
-        <p>Najlepszy wynik: 0</p>
+        <p>Twój wynik: {{score}}</p>
+        <p>Najlepszy wynik: {{bestScore}}</p>
       </div>
-      <button>ZAGRAJ PONOWNIE</button>
+      <button @click="newGame">ZAGRAJ PONOWNIE</button>
     </div>
   </div>
 </template>
@@ -14,6 +14,14 @@
 <script>
 export default {
   name: "EndMenu",
+
+  props: ["score", "bestScore"],
+
+  methods: {
+    newGame() {
+      this.$emit("newGame");
+    },
+  },
 };
 </script>
 

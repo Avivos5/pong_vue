@@ -20,8 +20,6 @@ export default {
 
       playerResult: {
         score: 0,
-        lifes: 3,
-        bestScore: 0,
       },
 
       // Ball object
@@ -148,6 +146,10 @@ export default {
       }
     },
 
+    minusLife() {
+      this.$emit("minusLife", this.playerResult.score);
+    },
+
     resetBall() {
       this.ball.x = this.canvasWidth / 2;
       this.ball.y = this.canvasHeight / 2;
@@ -156,6 +158,8 @@ export default {
         : (this.ball.velocityY = -5);
       this.ball.velocityX = -5;
       this.ball.currentSpeed = this.ball.startSpeed;
+
+      this.minusLife();
     },
 
     update() {

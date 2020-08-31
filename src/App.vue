@@ -1,8 +1,20 @@
 <template>
   <div id="app">
     <StartMenu v-if="!gameOn" @startGame="gameOn = true" />
-    <Game v-if="gameOn" canvasHeight="500" canvasWidth="1000" />
-    <EndMenu v-if="gameFinished" />
+
+    <Game
+      v-if="gameOn && !gameFinished"
+      canvasHeight="500"
+      canvasWidth="1000"
+      @minusLife="minusLife"
+    />
+
+    <EndMenu
+      v-if="gameFinished"
+      :score="gameResult.score"
+      :bestScore="gameResult.bestScore"
+      @newGame="newGame"
+    />
   </div>
 </template>
 
@@ -23,7 +35,32 @@ export default {
     return {
       gameOn: false,
       gameFinished: false,
+
+      gameResult: {
+        score: 0,
+        lifes: 3,
+        bestScore: 0,
+      },
     };
+  },
+
+  methods: {
+    minusLife(result) {
+      this.gameResult.lifes--;
+      if (!this.gameResult.lifes) {
+        this.gameResult.score = result;
+        if (this.gameResult.score >= this.gameResult.bestScore)
+          this.gameResult.bestScore = this.gameResult.score;
+        this.gameFinished = true;
+      }
+    },
+
+    newGame() {
+      this.gameResult.score = 0;
+      this.gameResult.lifes = 3;
+      this.gameFinished = false;
+      this.gameOn = true;
+    },
   },
 };
 </script>
