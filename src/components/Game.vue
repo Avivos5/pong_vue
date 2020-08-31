@@ -29,7 +29,7 @@ export default {
         x: this.canvasWidth / 2,
         y: this.canvasHeight / 2,
         radius: 10,
-        velocityX: -5,
+        velocityX: 5,
         velocityY: 5,
         startSpeed: 5,
         currentSpeed: 5,
@@ -224,7 +224,6 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 #canv {
   border: 1px solid black;
 }
