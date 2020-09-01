@@ -29,8 +29,8 @@ export default {
         radius: 10,
         velocityX: 5,
         velocityY: 5,
-        startSpeed: 5,
-        currentSpeed: 5,
+        startSpeed: 7,
+        currentSpeed: 7,
         color: "#fff",
       },
 
@@ -62,10 +62,6 @@ export default {
     const canv = document.getElementById("canv");
     const ctx = canv.getContext("2d");
     this.vueCanvas = ctx;
-    // console.log(canv);
-    // console.log(this.vueCanvas);
-
-    // this.render();
     this.game();
   },
 
@@ -192,8 +188,6 @@ export default {
         this.user.y + this.user.height > this.ball.y - this.ball.radius
       ) {
         // paddle collision handling
-
-        // this.ball.velocityX = -this.ball.velocityX;
 
         const collPoit = this.ball.y - (this.user.y + this.user.height / 2); //checking part of the paddle which was hit by the ball
 

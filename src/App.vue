@@ -2,12 +2,19 @@
   <div id="app">
     <StartMenu v-if="!gameOn" @startGame="gameOn = true" />
 
-    <Game
-      v-if="gameOn && !gameFinished"
-      canvasHeight="500"
-      canvasWidth="1000"
-      @minusLife="minusLife"
-    />
+    <div class="gameWrapper" v-if="gameOn && 
+    !gameFinished">
+      <div class="iconsWrapper">
+        <LifeIcon v-for="n in gameResult.lifes" :key="n" />
+      </div>
+
+      <Game
+        v-if="gameOn && !gameFinished"
+        canvasHeight="500"
+        canvasWidth="1000"
+        @minusLife="minusLife"
+      />
+    </div>
 
     <EndMenu
       v-if="gameFinished"
@@ -22,6 +29,7 @@
 import Game from "./components/Game.vue";
 import StartMenu from "./components/StartMenu.vue";
 import EndMenu from "./components/EndMenu.vue";
+import LifeIcon from "./components/LifeIcon.vue";
 
 export default {
   name: "App",
@@ -29,6 +37,7 @@ export default {
     Game,
     StartMenu,
     EndMenu,
+    LifeIcon,
   },
 
   data() {
@@ -79,6 +88,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.gameWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconsWrapper {
+  display: flex;
+  justify-content: center;
 }
 
 .menu {
