@@ -1,26 +1,14 @@
-[Link for working game.](https://avivos5.github.io/pong_vue/)
+# [Link to a working demo](https://avivos5.github.io/pong_vue/)
+# Single-player pong game
 
-# pong_vue
+Variation of well-known Pong game made for one player.
 
-## Project setup
-```
-npm install
-```
+## Made using
+- Vue.js (2.6)
+- HTML Canvas
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+![Start menu](https://user-images.githubusercontent.com/15701127/114585460-f5000480-9c83-11eb-850f-d6ecebf00788.png)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+![Game](https://user-images.githubusercontent.com/15701127/114585468-f6c9c800-9c83-11eb-8cc4-1c9d3db509b0.png)
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Finish menu](https://user-images.githubusercontent.com/15701127/114585478-fb8e7c00-9c83-11eb-8c6e-8d67355b894b.png)
